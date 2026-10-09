@@ -14,6 +14,7 @@ from .engine import (
     interview_turn,
     match_job,
 )
+from .extensions import router as extensions_router
 from .repository import JsonRepository
 from .schemas import (
     AssessmentCreateRequest,
@@ -41,6 +42,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.include_router(extensions_router)
 repo = JsonRepository(settings.data_dir / "qiuzhi.sqlite3")
 ai = get_ai_provider()
 
