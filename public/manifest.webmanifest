@@ -1,0 +1,10 @@
+{
+  "name": "求职 AI",
+  "short_name": "求职AI",
+  "description": "简历、笔试、AI 面试与求职复盘一体化工作台",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#101318",
+  "icons": []
+}
