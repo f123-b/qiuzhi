@@ -1,0 +1,32 @@
+services:
+  api:
+    build: ./server
+    ports:
+      - "8000:8000"
+    environment:
+      QIUZHI_ENV: development
+      QIUZHI_AI_PROVIDER: ${QIUZHI_AI_PROVIDER:-mock}
+      QIUZHI_AI_BASE_URL: ${QIUZHI_AI_BASE_URL:-https://api.deepseek.com}
+      QIUZHI_AI_API_KEY: ${QIUZHI_AI_API_KEY:-}
+      QIUZHI_AI_MODEL: ${QIUZHI_AI_MODEL:-deepseek-chat}
+      QIUZHI_CORS_ORIGINS: http://localhost:5173
+    volumes:
+      - qiuzhi_data:/data
+
+  postgres:
+    image: pgvector/pgvector:pg17
+    profiles: ["production"]
+    environment:
+      POSTGRES_DB: qiuzhi
+      POSTGRES_USER: qiuzhi
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-qiuzhi}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:8-alpine
+    profiles: ["production"]
+
+volumes:
+  qiuzhi_data:
+  pg_data:
